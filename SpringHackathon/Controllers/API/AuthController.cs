@@ -26,7 +26,7 @@ namespace SpringHackathon.Controllers.API
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        [HttpPost]
+        /*[HttpPost]
         [Route("roles/add")]
         public async Task<IActionResult> CreateRole([FromBody] CreateRoleModel request)
         {
@@ -144,7 +144,7 @@ namespace SpringHackathon.Controllers.API
             }
 
 
-        }
+        }*/
         
     }
 }

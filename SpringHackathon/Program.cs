@@ -1,9 +1,16 @@
+using SpringHackathon.Models;
 using SpringHackathon.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddIdentity<User, UserRole>()
+        .AddMongoDbStores<User, UserRole, Guid>
+        (
+            mongoDbSettings.ConnectionString, mongoDbSettings.Name
+        );
 
 var app = builder.Build();
 

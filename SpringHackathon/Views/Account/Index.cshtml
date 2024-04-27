@@ -1,0 +1,30 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Data</title>
+    <link href="/css/Account.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="cards">
+        <div class="user-card">
+            <div class="user-photo">
+                <img src="/img/icon.png" alt="User Photo">
+            </div>
+            <div class="user-info">
+                <h3 class="nickname">UserName: <br><span>@Model.UserName</span></h3>
+                <h3 class="email">Email: <br><span>@Model.Email</span></h3>
+            </div>
+            <button class="edit-btn">EDIT</button>
+        </div>
+    </div>
+
+</body>
+</html>
+

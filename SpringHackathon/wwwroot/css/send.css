@@ -1,0 +1,55 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+.input_box input, button {
+    font-family: 'Russo One', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+}
+
+.cta {
+    color: #0d1117;
+}
+
+.input_box {
+    width: 80vw;
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+input {
+    width: 65vw;
+    height: 40px;
+    padding: 0;
+    background-color: #0d1117;
+    border: solid 3px #c3cbd3;
+    border-radius: 6px;
+}
+
+.input_box input::placeholder {
+    color: white;
+}
+
+.input_box::target-text {
+    color: white;
+}
+
+.input_box button {
+    width: 15vw;
+    height: 40px;
+    margin-left: 1rem;
+    background-color: #0d1117;
+    color: white;
+    border-color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+    .input_box button:hover {
+        background-color: white;
+        color: black;
+        border: none;
+    }

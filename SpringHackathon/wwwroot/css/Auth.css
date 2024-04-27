@@ -8,7 +8,7 @@
   position: relative;
   width: 100%;
   background-color: #fff;
-  min-height: 97vh;
+  min-height: 96vh;
   overflow: hidden;
 }
 
@@ -210,18 +210,13 @@ form.sign-in-form {
 }
 
 .btn.transparent {
-  margin: 0;
   background: none;
   border: 2px solid #fff;
-  width: 130px;
-  height: 41px;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
-.panel.btn.transparent{
-  
-}
+
 
 .btn.transparent:hover {
     background: #f2a468;
@@ -271,7 +266,7 @@ form.sign-in-form {
   pointer-events: all;
 }
 
-@media (max-width: 870px) {
+@media (max-width: 1300px) {
   .cont {
     min-height: 800px;
     height: 100vh;
@@ -385,6 +380,12 @@ form.sign-in-form {
   .panel .content {
     padding: 0.5rem 1rem;
   }
+
+  .panel h1 {
+  font-weight: 600;
+  line-height: 1;
+  font-size: 1rem;
+}
   .cont {
     padding: 1.5rem;
   }

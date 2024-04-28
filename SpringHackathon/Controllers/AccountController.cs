@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using SpringHackathon.Models;
 using SpringHackathon.Services;
+using SpringHackathon.Utils;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
@@ -17,7 +18,8 @@ namespace SpringHackathon.Controllers
         private readonly IUserStore<User> _userStore;
         private readonly IUserEmailStore<User> _emailStore;
 		private readonly IAuthenticationSchemeProvider _authenticationSchemeProvider;
-		public AccountController(UserManager<User> userManager ,SignInManager<User> signInManager, IUserStore<User> userStore, IAuthenticationSchemeProvider authenticationSchemeProvider)
+        private readonly EmailSenderService _emailSenderService;
+		public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IUserStore<User> userStore, IAuthenticationSchemeProvider authenticationSchemeProvider, EmailSenderService emailSenderService)
         {
             //_userService = new UserService(userManager, signInManager, userStore);
             _userManager = userManager;
@@ -25,7 +27,7 @@ namespace SpringHackathon.Controllers
             _userStore = userStore;
             _emailStore = (IUserEmailStore<User>)userStore;
 			_authenticationSchemeProvider = authenticationSchemeProvider;
-           
+            _emailSenderService = emailSenderService;
         }
 
         public async Task<IActionResult> Index()
@@ -59,7 +61,11 @@ namespace SpringHackathon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel loginModel, string returnurl=null)
         {
-			returnurl=returnurl ?? Url.Content("~/");
+			if (User.Identity.IsAuthenticated)
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			returnurl =returnurl ?? Url.Content("~/");
 
 			if (ModelState.IsValid)
             {
@@ -105,8 +111,11 @@ namespace SpringHackathon.Controllers
                 await _userStore.SetUserNameAsync(user, registerModel.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, registerModel.Email, CancellationToken.None);
                 user.EmailConfirmed = true;
-                await _userManager.CreateAsync(user, registerModel.Password);
-
+                var result = await _userManager.CreateAsync(user, registerModel.Password);
+                if (result.Succeeded)
+                {
+                    _emailSenderService.SendMessage(registerModel.Email, EmailTemplate.Subject,EmailTemplate.Body);
+                }
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return Redirect(returnurl ?? "/");
             }
@@ -162,6 +171,10 @@ namespace SpringHackathon.Controllers
 
 				if (result.Succeeded)
 				{
+					if (result.Succeeded)
+					{
+						_emailSenderService.SendMessage(info.Principal.FindFirstValue(ClaimTypes.Email), EmailTemplate.Subject, EmailTemplate.Body);
+					}
 					result = await _userManager.AddLoginAsync(user, info);
 					if (result.Succeeded)
 					{

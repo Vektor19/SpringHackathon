@@ -4,13 +4,20 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using SpringHackathon.Services;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
-// Add services to the container.
+
+builder.Services.Configure<EmailSenderConfig>(builder.Configuration.GetSection("EmailSenderConfig"));
+
+builder.Services.AddTransient<EmailSenderService>(service => new EmailSenderService(builder.Configuration.GetSection(nameof(EmailSenderConfig)).Get<EmailSenderConfig>()));
+
 builder.Services.AddControllersWithViews();
 
+
 builder.Services.AddIdentity<User, UserRole>()
-        .AddMongoDbStores<User, UserRole, Guid>
+		.AddMongoDbStores<User, UserRole, Guid>
         (
             mongoDbSettings.ConnectionString, mongoDbSettings.Name
         );
@@ -45,10 +52,15 @@ builder.Services.AddAuthentication()
          options.Scope.Add("read:user");
          options.SaveTokens = true;
      });
-     
+
+// Add services to the container.
 
 var app = builder.Build();
-
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api");
+});
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

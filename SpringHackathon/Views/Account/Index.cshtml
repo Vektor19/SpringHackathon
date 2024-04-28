@@ -13,11 +13,21 @@
 </head>
 <body>
     <div>
+        
         <div class="wave"></div>
         <div class="wave"></div>
         <div class="wave"></div>
         <div class="wave"></div>
 
+        @* <div class='light x1'></div>
+        <div class='light x2'></div> *@
+        @* <div class='light x3'></div> *@
+        <div class='light x4'></div>
+        <div class='light x5'></div>
+        <div class='light x6'></div>
+        <div class='light x7'></div>
+        <div class='light x8'></div>
+        <div class='light x9'></div>
         <div class="cards">
             <div class="user-card">
                 <div class="user-photo">
@@ -28,12 +38,14 @@
 
                     <h3 style="font-size:1.5vw; class="email"><strong>Email:</strong> <br><span style="font-size:1.2vw;">@Model.Email</span></h3>
                 </div>
-                <form asp-action="Edit" method="get">
-                    <button class="edit-btn" type="submit"><strong>EDIT</strong></button>
-                </form>
-                <form asp-action="Password" method="get">
-                    <button class="edit-btn" type="submit"><strong>Change<br>Password</strong></button>
-                </form>
+                <div class="devide-btns">
+                    <form asp-action="Edit" method="get">
+                        <button class="edit-btn" type="submit"><strong>EDIT</strong></button>
+                    </form>
+                    <form asp-action="Password" method="get">
+                        <button class="password-btn" type="submit"><strong>Change<br>Password</strong></button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

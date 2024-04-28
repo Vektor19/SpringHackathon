@@ -41,6 +41,8 @@ namespace SpringHackathon.Controllers
         /// </summary>
         private readonly EmailSenderService _emailSenderService;
 
+        private RoleManager<UserRole> _roleManager;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountController"/> class.
         /// </summary>
@@ -49,7 +51,7 @@ namespace SpringHackathon.Controllers
         /// <param name="userStore">User store instance for storing user information.</param>
         /// <param name="authenticationSchemeProvider">Provider for accessing authentication schemes.</param>
         /// <param name="emailSenderService">Service for sending emails to users.</param>
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IUserStore<User> userStore, IAuthenticationSchemeProvider authenticationSchemeProvider, EmailSenderService emailSenderService)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IUserStore<User> userStore, IAuthenticationSchemeProvider authenticationSchemeProvider, EmailSenderService emailSenderService, RoleManager<UserRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -57,6 +59,7 @@ namespace SpringHackathon.Controllers
             _emailStore = (IUserEmailStore<User>)userStore;
 			_authenticationSchemeProvider = authenticationSchemeProvider;
             _emailSenderService = emailSenderService;
+            _roleManager = roleManager;
         }
         /// <summary>
         /// Displays the user's account details if authenticated.
@@ -151,13 +154,18 @@ namespace SpringHackathon.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var user = Activator.CreateInstance<User>();
                 await _userStore.SetUserNameAsync(user, registerModel.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, registerModel.Email, CancellationToken.None);
                 user.EmailConfirmed = true;
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
                 if (result.Succeeded)
-                    _emailSenderService.SendMessage(registerModel.Email, EmailTemplate.Subject,EmailTemplate.Body);
+                {
+                    await _userManager.AddToRoleAsync(user, "User");
+                    _emailSenderService.SendMessage(registerModel.Email, EmailTemplate.Subject, EmailTemplate.Body);
+                }
+                    
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return Redirect(returnurl ?? "/");
             }

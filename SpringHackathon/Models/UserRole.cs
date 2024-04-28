@@ -6,6 +6,6 @@ namespace SpringHackathon.Models
     [CollectionName("Roles")]
     public class UserRole : MongoIdentityRole<Guid>
     {
-
+        
     }
 }

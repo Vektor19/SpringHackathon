@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 using SpringHackathon.Models;
 using SpringHackathon.Services;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace SpringHackathon.Controllers
 {
@@ -16,13 +17,15 @@ namespace SpringHackathon.Controllers
         private SignInManager<User> _signInManager;
         private readonly IUserStore<User> _userStore;
         private readonly IUserEmailStore<User> _emailStore;
-        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, SignInManager<User> signInManager, IUserStore<User> userStore)
+        private RoleManager<UserRole> _roleManager;
+        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, SignInManager<User> signInManager, IUserStore<User> userStore, RoleManager<UserRole> roleManager)
         {
             _logger = logger;
             this._userService = new UserService(userManager);
             this._signInManager = signInManager;
             _userStore = userStore;
             _emailStore= (IUserEmailStore<User>)userStore;
+            _roleManager = roleManager;
         }
 
         public async Task<IActionResult> Index()

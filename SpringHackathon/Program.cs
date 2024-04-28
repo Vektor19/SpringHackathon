@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 using SpringHackathon.Services;
 using Microsoft.Extensions.DependencyInjection;
 using SpringHackathon.Hubs;
+using Microsoft.AspNetCore.Identity;
+using System.Xml.Linq;
 var builder = WebApplication.CreateBuilder(args);
 var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
 

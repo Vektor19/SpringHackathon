@@ -20,7 +20,7 @@ namespace SpringHackathon.Controllers
         {
             _logger = logger;
             this._userService = new UserService(userManager);
-                        this._signInManager = signInManager;
+            this._signInManager = signInManager;
             _userStore = userStore;
             _emailStore= (IUserEmailStore<User>)userStore;
         }

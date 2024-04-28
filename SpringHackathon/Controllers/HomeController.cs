@@ -18,7 +18,9 @@ namespace SpringHackathon.Controllers
         private readonly IUserStore<User> _userStore;
         private readonly IUserEmailStore<User> _emailStore;
         private RoleManager<UserRole> _roleManager;
-        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, SignInManager<User> signInManager, IUserStore<User> userStore, RoleManager<UserRole> roleManager)
+        private readonly UserManager<User> _userManager;
+
+		public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, SignInManager<User> signInManager, IUserStore<User> userStore, RoleManager<UserRole> roleManager)
         {
             _logger = logger;
             this._userService = new UserService(userManager);
@@ -26,18 +28,13 @@ namespace SpringHackathon.Controllers
             _userStore = userStore;
             _emailStore= (IUserEmailStore<User>)userStore;
             _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
-            var user = Activator.CreateInstance<User>();
-            await _userStore.SetUserNameAsync(user, "test123@gmail.com", CancellationToken.None);
-            await _emailStore.SetEmailAsync(user, "test123@gmail.com", CancellationToken.None);
-            user.EmailConfirmed= true;
 
-            await _userService.CreateUser(user, "Lapse123!");
-            
-            return View();
+			return View();
         }
 
         public IActionResult Privacy()

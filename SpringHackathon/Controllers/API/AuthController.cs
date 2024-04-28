@@ -19,6 +19,7 @@ using System.Linq.Expressions;
 
 namespace SpringHackathon.Controllers.API
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase

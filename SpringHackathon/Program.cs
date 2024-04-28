@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using SpringHackathon.Services;
 using Microsoft.Extensions.DependencyInjection;
 using SpringHackathon.Hubs;
+using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using System.Xml.Linq;
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,10 @@ builder.Services.AddIdentity<User, UserRole>()
 builder.Services.AddSwaggerGen(c =>
 {
 	c.SwaggerDoc("v1", new OpenApiInfo { Title = "User API", Version = "v1" });
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
 });
 //Google auth
 builder.Services.AddAuthentication()

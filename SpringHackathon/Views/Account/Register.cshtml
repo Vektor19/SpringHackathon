@@ -1,28 +1,27 @@
-﻿
-@{
-    ViewData["Title"] = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+	ViewData["Title"] = "Register";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="/css/Auth.css" rel="stylesheet" />
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link href="/css/Auth.css" rel="stylesheet" />
 
-@* 	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			document.getElementById("sign-in-btn").addEventListener("click", function () {
-				window.location.href = "/Account/Login";
-			});
-		});
+	@* 	<script>
+	document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("sign-in-btn").addEventListener("click", function () {
+	window.location.href = "/Account/Login";
+	});
+	});
 	</script> *@
 </head>
 <body>
 	<div class="cont">
 		<div class="forms-container">
 			<div class="signin-signup">
-				<form id="registerForm" gmethod="post">
+				<form id="registerForm" method="post">
 					<h2 class="title">Sign up</h2>
 					<div class="input-field">
 						<i class='bx bx-envelope'></i>
@@ -40,17 +39,17 @@
 					<button id="registerSubmit" class="btn" type="submit">Register</button>
 					<p class="social-text">Or Sign up with social platforms</p>
 					<div class="social-media">
-						<a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="GitHub" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="social-icon">
-							<i class='bx bxl-github'></i>
+						<a href="#" class="social-icon">
+							<i class='bx bxl-facebook'></i>
 						</a>
-						<a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Twitter" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="social-icon">
+						<a href="#" class="social-icon">
 							<i class='bx bxl-twitter'></i>
 						</a>
-						<a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Google" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="social-icon">
+						<a href="#" class="social-icon">
 							<i class='bx bxl-google'></i>
 						</a>
-						<a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Discord" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="social-icon">
-							<i class='bx bxl-discord-alt'></i>
+						<a href="#" class="social-icon">
+							<i class='bx bxl-linkedin'></i>
 						</a>
 					</div>
 				</form>
@@ -64,12 +63,12 @@
 						Discover a world of possibilities! Join us and explore a vibrant
 						community where ideas flourish and connections thrive.
 					</p>
- 					<form id="signInForm" method="get"  asp-action="Login">
+					<form id="signInForm" method="get" asp-action="Login">
 						<button class="btn transparent" type="submit">Log in</button>
-					</form> 
+					</form>
 
-										@* <button class="btn transparent" id="sign-in-btn">
-						Sign in
+					@* <button class="btn transparent" id="sign-in-btn">
+					Sign in
 					</button> *@
 				</div>
 			</div>

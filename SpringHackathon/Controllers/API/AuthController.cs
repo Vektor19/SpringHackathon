@@ -62,7 +62,7 @@ namespace SpringHackathon.Controllers.API
 				User appUser = await _userManager.FindByEmailAsync(loginModel.Email);
 				if (appUser != null)
 				{
-					var result = await _signInManager.PasswordSignInAsync(appUser.Email, loginModel.Password, false, false);
+					var result = await _signInManager.PasswordSignInAsync(appUser.UserName, loginModel.Password, false, false);
 
 					if (result.Succeeded)
 					{

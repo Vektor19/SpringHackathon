@@ -137,6 +137,7 @@ namespace SpringHackathon.Controllers.API
 			{
 				return NotFound(new { Message = "User not found" });
 			}
+            await _signInManager.SignInAsync(user ,false);
 
 			// Delete the user
 			var result = await _userManager.DeleteAsync(user);

@@ -39,17 +39,17 @@
 					<button id="registerSubmit" class="btn" type="submit">Register</button>
 					<p class="social-text">Or Sign up with social platforms</p>
 					<div class="social-media">
-						<a href="#" class="social-icon">
-							<i class='bx bxl-facebook'></i>
+						<a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="GitHub" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="social-icon">
+							<i class='bx bxl-github'></i>
 						</a>
-						<a href="#" class="social-icon">
+						<a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Twitter" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="social-icon">
 							<i class='bx bxl-twitter'></i>
 						</a>
-						<a href="#" class="social-icon">
+						<a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Google" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="social-icon">
 							<i class='bx bxl-google'></i>
 						</a>
-						<a href="#" class="social-icon">
-							<i class='bx bxl-linkedin'></i>
+						<a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="Discord" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="social-icon">
+							<i class='bx bxl-discord-alt'></i>
 						</a>
 					</div>
 				</form>

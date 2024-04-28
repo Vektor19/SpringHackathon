@@ -4,32 +4,54 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="edit-form">
-    @if (ViewBag.IsSuccess == true)
-    {
-        <div class="alert alert-success" role="alert">
-            Successfully changed data!
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Data</title>
+    <link href="/css/EditPage.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class='light x4'></div>
+        <div class='light x5'></div>
+        <div class='light x6'></div>
+        <div class='light x7'></div>
+        <div class='light x8'></div>
+        <div class='light x9'></div>
+    <section class="data-search">
+        <div class="edit-form">
+            @if (ViewBag.IsSuccess == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    Successfully changed data!
+                </div>
+            }
+            else if (ViewBag.ModelError != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.ModelError
+                </div>
+            }
+            
+            <form asp-action="Edit" method="post" class="form-container">
+                <div class="form-group">
+                    <h1 class="text"> UserName:</h1>
+                    <input asp-for="UserName" id="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <h1 class="text"> Email:</h1>
+                    <input asp-for="Email" id="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                    <button type="submit" class="btn"><strong>Save Changes</strong></button>
+            </form>
         </div>
-    }
-    else if (ViewBag.ModelError != null)
-    {
-        <div class="alert alert-danger" role="alert">
-            @ViewBag.ModelError
-        </div>
-    }
-
-    <form asp-action="Edit" method="post">
-        <div class="form-group">
-            <label asp-for="UserName">Username:</label>
-            <input asp-for="UserName" class="form-control" />
-            <span asp-validation-for="UserName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Email">Email:</label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-    </form>
-</div>
+    </section>
+    </div>
+</body>
+</html>

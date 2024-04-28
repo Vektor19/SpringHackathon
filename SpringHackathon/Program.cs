@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SpringHackathon.Services;
 using Microsoft.Extensions.DependencyInjection;
+using SpringHackathon.Hubs;
 var builder = WebApplication.CreateBuilder(args);
 var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
 
@@ -16,7 +17,7 @@ builder.Services.AddTransient<EmailSenderService>(service => new EmailSenderServ
 
 builder.Services.AddControllersWithViews();
 
-
+builder.Services.AddSignalR();
 builder.Services.AddIdentity<User, UserRole>()
 		.AddMongoDbStores<User, UserRole, Guid>
         (
@@ -74,7 +75,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.MapHub<ChatHub>("/chatHub");
 app.UseAuthorization();
 
 app.MapControllerRoute(

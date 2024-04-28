@@ -1,25 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using SpringHackathon.Models;
 
 namespace SpringHackathon.Controllers
 {
+    [Authorize]
     public class ChatController : Controller
     {
-        public IActionResult Chat()
-        {
-            return View();
-        }
+        private readonly UserManager<User> _userManager;
 
-        public Task<IActionResult> SendMessage()
+        public ChatController(UserManager<User> userManager)
         {
-            string message = GetMessage();
+            _userManager = userManager;
         }
-
-        public string GetMessage()
+        public async Task<IActionResult> Chat()
         {
-            string result = Request.Form["messageHolder"];
-            if(result == null)
-                return null;
-            return result;
+            var currentUser = await _userManager.GetUserAsync(User);
+            return View(currentUser);
         }
     }
 }

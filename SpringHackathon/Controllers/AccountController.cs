@@ -72,7 +72,7 @@ namespace SpringHackathon.Controllers
                 User appUser = await _userManager.FindByEmailAsync(loginModel.Email);
                 if (appUser != null)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(loginModel.Email, loginModel.Password, false, false);
+                    var result = await _signInManager.PasswordSignInAsync(appUser.UserName, loginModel.Password, false, false);
 
                     if (result.Succeeded)
                     {
@@ -188,8 +188,111 @@ namespace SpringHackathon.Controllers
 			}
 			return RedirectToAction("Index", "Home");
 		}
-	
-	}
+
+        [HttpGet]
+        public async Task<IActionResult> Edit()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                return View(user);
+            }
+
+            return NotFound();
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ModelError = "Validation failed. Please check your inputs.";
+                return View(user);
+            }
+
+            if (user != null)
+            {
+                user.UserName = model.Username;
+                user.Email = model.Email;
+
+                var updateResult = await _userManager.UpdateAsync(user);
+
+                if (updateResult.Succeeded)
+                {
+                    ViewBag.IsSuccess = true;
+                    return View(user);
+                }
+                else
+                {
+                    foreach (var error in updateResult.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View(user);
+                }
+
+            }
+            else
+            {
+                return View(user);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Password()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                return View();
+            }
+
+            return NotFound();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Password(PasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    await _userManager.UpdateAsync(user);
+                    ViewBag.IsSuccess = true;
+                    ModelState.Clear();
+                    return View();
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return (View(model));
+
+        }
+
+
+    }
 
 }
 

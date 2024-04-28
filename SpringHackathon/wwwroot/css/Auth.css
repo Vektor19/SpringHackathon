@@ -90,9 +90,13 @@ form.sign-in-form {
   color: #333;
 }
 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #f0f0f0 inset;
+}
+
 .input-field input::placeholder {
-  color: #aaa;
-  font-weight: 500;
+    color: #aaa;
+    font-weight: 500;
 }
 
 .social-text {

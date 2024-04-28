@@ -1,0 +1,98 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    z-index: 999;
+    position: fixed; 
+    top: 0; 
+    bottom: 0; 
+    background: #181820;
+    width: 10rem;
+    height: 100vh;
+    color: #5c636a;
+    transition: width 0.3s, background 1s;
+}
+
+#sidebar-toggle {
+    cursor: pointer;
+    position: absolute;
+    bottom: 24px; 
+    right: 24px; 
+    width: 4vw;
+}
+
+.sidebar nav {
+    overflow-x: hidden;
+    color: #21212b;
+    transition: color 1s;
+}
+
+.sidebar li {
+    list-style-type: none;
+}
+
+.sidebar ul li.active a {
+    color: #e3e3e3;
+    background: #21212b;
+}
+
+.sidebar ul a:hover {
+    color: #e3e3e3;
+}
+
+.sidebar ul a{
+    text-decoration:none;
+    font-size: 1vw;
+}
+
+.sidebar ul a span {
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.sidebar nav ul {
+    padding-left: 0;
+}
+
+.sidebar nav ul li a {
+    display: flex; /* Add flex display */
+    align-items: center; /* Center items vertically */
+    color: #5c636a;
+}
+
+.sidebar .toggle {
+    color: #5c636a;
+}
+
+.sidebar .toggle:hover {
+    color: #e3e3e3;
+}
+
+.sidebar.closed {
+    width: 4.5rem;
+}
+
+.sidebar.closed .toggle {
+    transform: rotate(180deg);
+}
+
+.sidebar.closed nav ul li a span {
+    opacity: 0;
+    width: 0;
+}
+
+.sidebar nav ul li a span {
+    opacity: 1;
+    width: auto;
+}
+
+.logo-img {
+    margin-top: 1vh;
+    width: 4.5rem;
+    height: 8vh;
+    object-fit: contain;
+    border-radius: 50%;
+}

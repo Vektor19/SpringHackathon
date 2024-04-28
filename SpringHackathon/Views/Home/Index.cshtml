@@ -1,8 +1,64 @@
 ﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+
+        .welcome-container {
+            margin-top: 100px;
+        }
+
+        .welcome-heading {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+
+        .welcome-text {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            text-align: justify;
+        }
+
+        .welcome-link {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+            .welcome-link:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="container welcome-container">
+        <div class="text-center">
+            <h1 class="welcome-heading">Welcome</h1>
+            <p class="welcome-text">
+                Welcome to our chat application! Here, you can connect with another person and engage in conversations, whether it's for work, study, or just casual chit-chat. Our platform provides a secure and user-friendly environment for your communication needs.
+                <br><br>
+                As we continue to evolve, we're dedicated to enhancing your experience by adding new features, improving performance, and ensuring your privacy and security. Our goal is to create a seamless and enjoyable chatting experience for you and your peers.
+                <br><br>
+                We value your feedback and suggestions as they help us shape the future of our product. Feel free to explore the various functionalities of our chat application and let us know how we can make it even better. Together, we'll build a platform that meets your communication needs and beyond.
+                <br><br>
+                Start chatting now and discover the possibilities!
+                <br><br>
+                Else we will post here new information about us!
+            </p>
+        </div>
+    </div>
+</body>
+</html>

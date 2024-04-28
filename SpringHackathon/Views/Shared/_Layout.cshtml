@@ -1,24 +1,101 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - SpringHackathon</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/SpringHackathon.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/SpringHackathon.styles.css" asp-append-version="true">
+
+    <!-- Styles for the sidebar -->
 </head>
 <body>
 
-        <main role="main">
-            @RenderBody()
-        </main>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+        <!-- Sidebar -->
+    <div class="flex relative">
+            <div class="sidebar flex flex-col antialiased relative shadow-xl closed">
+            <a href="@Url.Action("Index", "Home")">
+                    <img src="/img/icon.png" alt="Company Logo" class="logo-img">
+                </a>
+                <nav class="my-4 flex-1">
+                    <ul class="flex flex-col h-full">
+                        <li>
+                        <a href="@Url.Action("Index", "Account")" class="flex h-14 rounded items-center transition duration-300 relative">
+                                <div class="p-4"><i icon-name="mail"></i></div>
+                            <span class="font-semibold"><strong>Chat</strong></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex h-14 rounded items-center transition duration-300">
+                            <div class="p-4"><i data-lucide="scale"></i></div>
+                            <span class="font-semibold"><strong>Rules</strong></span>
+                            </a>
+                        </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="flex flex-col h-full">
+                            <li>
+                                <a href="@Url.Action("Index", "Account")" class="flex h-14 rounded items-center transition duration-300">
+                                    <div class="p-4"><i data-lucide="circle-user"></i></div>
+                                    <span class="font-semibold">@User.Identity.Name</span>
+                                </a>
+                            </li>
+                            <li class="mt-auto">
+                                <a href="@Url.Action("Logout", "Account")" class="flex h-14 rounded items-center transition duration-300 relative">
+                                    <div class="p-4"><i data-lucide="log-out"></i></div>
+                                    <span class="font-semibold">Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="flex flex-col h-full">
+                            <li>
+                                <a href="@Url.Action("Login", "Account")" class="flex h-14 rounded items-center transition duration-300">
+                                    <div class="p-4"><i data-lucide="key-round"></i></div>
+                                    <span class="font-semibold"><strong>Log In</strong></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Register", "Account")" class="flex h-14 rounded items-center transition duration-300">
+                                    <div class="p-4"><i data-lucide="pen"></i></div>
+                                    <span class="font-semibold"><strong>Sign Up</strong></span>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                    </ul>
+            </nav>
+            <div id="sidebar-toggle" class="transition duration-500 toggle flex items-center justify-center w-10 h-10 rounded-full cursor-pointer">
+                <i icon-name="chevron-left"></i>
+            </div>
+        </div>
+    </div>
 
 
-    <footer class="border-top footer text-muted">
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 
-            &copy; 2024 - SpringHackathon MADE BY SSG-25K
+    <script>
+        const sidebarToggleBtn = document.querySelector('#sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
 
-    </footer>
+        sidebarToggleBtn.addEventListener("click", function () {
+            sidebar.classList.toggle("closed");
+
+        });
+    </script>
+
+    <!-- jQuery and Bootstrap Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,11 +1,81 @@
 ﻿
-
+/*Background part*/
 body {
-
+    background: rgba(22,20,22,1);
 }
 
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.wave {
+    background: rgb(255 255 255 / 25%);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 25vh;
+    animation: wave 15s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+    .wave:nth-of-type(2) {
+        bottom: -1.25em;
+        animation: wave 18s linear reverse infinite;
+        opacity: 0.8;
+    }
+
+    .wave:nth-of-type(3) {
+        bottom: -2.5em;
+        animation: wave 90s -1s reverse infinite;
+        opacity: 0.9;
+    }
+
+    .wave:nth-of-type(4) {
+        bottom: -3.5em;
+        animation: wave 25s -1s reverse infinite;
+        opacity: 1;
+    }
+
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
+
+
+
+/*Card part*/
 .cards {
-    background: linear-gradient(-45deg, #181616 10%, #2b2b2b 100%);
     width: 100%;
     height: 97vh;
     display: flex;
@@ -26,7 +96,7 @@ body {
     color: #fff; /* Белый цвет текста */
     border-radius: 10px;
     padding: 20px;
-    width: 400px;
+    width: 25vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center; /* Центрирование текста и кнопки */
     font-family: Arial, sans-serif; /* Установка шрифта */
@@ -46,14 +116,16 @@ body {
 .user-info {
     margin-bottom: 30px;
 }
-.user-info h3{
-    margin: 24px;
-    padding: 12px;
-    border:1px solid black;
-}
-    .user-info span {
-        text-decoration: underline; /* добавляем подчеркивание к <span> */
+
+    .user-info h3 {
+        margin: 24px;
+        padding: 12px;
+        border: 2px solid gray;
     }
+
+    .user-info span {
+    }
+
 .nickname,
 .email {
     margin: 0;

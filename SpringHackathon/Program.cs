@@ -56,11 +56,7 @@ builder.Services.AddAuthentication()
 // Add services to the container.
 
 var app = builder.Build();
-app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api");
-});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

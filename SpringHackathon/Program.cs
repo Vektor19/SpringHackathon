@@ -26,7 +26,15 @@ builder.Services.AddIdentity<User, UserRole>()
         (
             mongoDbSettings.ConnectionString, mongoDbSettings.Name
         );
-
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+});
 builder.Services.AddSwaggerGen(c =>
 {
 	c.SwaggerDoc("v1", new OpenApiInfo { Title = "User API", Version = "v1" });

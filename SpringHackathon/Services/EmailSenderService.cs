@@ -4,6 +4,9 @@ using SpringHackathon.Settings;
 
 namespace SpringHackathon.Services
 {
+	/// <summary>
+	/// Service for sending emails.
+	/// </summary>
 	public class EmailSenderService
 	{
 		private readonly string _fromMail;
@@ -11,6 +14,10 @@ namespace SpringHackathon.Services
 
 		private readonly SmtpClient _smtpClient;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="EmailSenderService"/> class.
+		/// </summary>
+		/// <param name="emailSenderConfig">The configuration for the email sender.</param>
 		public EmailSenderService(EmailSenderConfig emailSenderConfig)
 		{
 			_fromMail = emailSenderConfig.fromMail;
@@ -23,6 +30,13 @@ namespace SpringHackathon.Services
 			};
 		}
 
+		/// <summary>
+		/// Sends an email.
+		/// </summary>
+		/// <param name="toEmail">The email address to send the email to.</param>
+		/// <param name="subject">The subject of the email.</param>
+		/// <param name="body">The body of the email.</param>
+		/// <param name="isBodyHtml">A value indicating whether the body of the email is HTML.</param>
 		public void SendMessage(string toEmail, string subject, string body, bool isBodyHtml = true)
 		{
 			MailMessage message = new MailMessage();

@@ -223,8 +223,8 @@ namespace SpringHackathon.Controllers
 
 				if (result.Succeeded)
 				{
-					if (result.Succeeded)
-						_emailSenderService.SendMessage(info.Principal.FindFirstValue(ClaimTypes.Email), EmailTemplate.Subject, EmailTemplate.Body);
+                    await _userManager.AddToRoleAsync(user, "User");
+                    _emailSenderService.SendMessage(info.Principal.FindFirstValue(ClaimTypes.Email), EmailTemplate.Subject, EmailTemplate.Body);
 
 					result = await _userManager.AddLoginAsync(user, info);
 					if (result.Succeeded)

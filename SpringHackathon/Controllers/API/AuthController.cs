@@ -119,7 +119,10 @@ namespace SpringHackathon.Controllers.API
                 user.EmailConfirmed = true;
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
                 if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "User");
                     return Ok(new { Message = "User succesfully registered" });
+                } 
             }
             return BadRequest();
         }

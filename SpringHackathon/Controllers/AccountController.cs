@@ -162,8 +162,9 @@ namespace SpringHackathon.Controllers
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "User");
-                    _emailSenderService.SendMessage(registerModel.Email, EmailTemplate.Subject, EmailTemplate.Body);
+                    await _userManager.AddToRoleAsync(user, "User");     
+                    Thread thread = new Thread(() => _emailSenderService.SendMessage(registerModel.Email, EmailTemplate.Subject, EmailTemplate.Body));
+                    thread.Start();
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return Redirect(returnurl ?? "/");
                 }

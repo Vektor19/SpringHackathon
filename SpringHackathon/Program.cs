@@ -16,7 +16,7 @@ var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbConfig)).Ge
 
 builder.Services.Configure<EmailSenderConfig>(builder.Configuration.GetSection("EmailSenderConfig"));
 
-builder.Services.AddTransient<EmailSenderService>(service => new EmailSenderService(builder.Configuration.GetSection(nameof(EmailSenderConfig)).Get<EmailSenderConfig>()));
+builder.Services.AddSingleton<EmailSenderService>(service => new EmailSenderService(builder.Configuration.GetSection(nameof(EmailSenderConfig)).Get<EmailSenderConfig>()));
 
 builder.Services.AddControllersWithViews();
 

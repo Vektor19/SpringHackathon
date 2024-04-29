@@ -342,6 +342,24 @@ namespace SpringHackathon.Controllers
             }
             return (View(model));
         }
+
+        [HttpPost]
+        [Authorize]
+
+        public async Task<IActionResult> Delete()
+        {
+            
+            var user = await _userManager.GetUserAsync(User);
+
+            if(user != null)
+                await _signInManager.SignOutAsync();
+
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+                return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index", "Account");
+        }
     }
 }
 

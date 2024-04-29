@@ -1,7 +1,15 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
 }
 
-<h1>Index</h1>
-
+<div class="messages_container">
+</div>
+<div class=input_box>
+    <input type="text" placeholder="Input message: " id="messageInput" />
+    <button id="sendButton">Send</button>
+</div>
+<script>
+    var currentUser = @Html.Raw(Json.Serialize(Model));
+</script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

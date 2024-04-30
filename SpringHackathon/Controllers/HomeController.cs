@@ -28,7 +28,7 @@ namespace SpringHackathon.Controllers
 		/// Action method for the Privacy page.
 		/// </summary>
 		/// <returns>An IActionResult representing the Privacy view.</returns>
-		public IActionResult Privacy()
+		public IActionResult Rules()
 		{
 			return View();
 		}

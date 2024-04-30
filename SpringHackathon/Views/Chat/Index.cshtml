@@ -1,12 +1,15 @@
 ﻿@{
-    Layout = "~/Views/Shared/_ChatLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link rel="stylesheet" href="~/css/send.css" >
+<link rel="stylesheet" href="~/css/chat.css" />
 
 <div class="messages_container">
 </div>
-<div class=input_box>
+<div class="input_container">
     <input type="text" placeholder="Input message: " id="messageInput" />
-    <button id="sendButton">Send</button>
+    <button id="sendButton"><strong>Send</strong></button>
 </div>
 <script>
     var currentUser = @Html.Raw(Json.Serialize(Model));

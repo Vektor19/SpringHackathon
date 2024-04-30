@@ -7,9 +7,6 @@
 
 body {
     background: #181616;
-    font-family: system-ui;
-    display: grid;
-    grid-template-columns: 250px auto;
 }
 
 header h1 {
@@ -36,7 +33,7 @@ aside {
     padding: 1rem;
     margin: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .user {
@@ -57,11 +54,10 @@ aside {
 
     .bubble:after {
         position: absolute;
-        font-size: 0.75rem;
-        min-width: 150px;
-        right: 0;
-        text-align: right;
-        bottom: -1.5rem;
+        font-size: 0.8rem;
+        min-width: 50px;
+        right: 10px;
+        bottom: 10px;
         content: var(--time);
     }
 
@@ -73,6 +69,11 @@ aside {
     .user, .bubble p {
         color: white;
     }
+
+
+.me {
+    margin-left: auto;
+}
 
 
 .you {
@@ -94,6 +95,8 @@ main {
 }
 
 .messages_container {
-    width: auto;
+    width: 100%;
     height: 90vh;
+    max-height: 90vh;
+    overflow-y: auto;
 }

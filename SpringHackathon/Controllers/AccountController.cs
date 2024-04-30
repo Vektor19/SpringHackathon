@@ -2,11 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using SpringHackathon.Models;
 using SpringHackathon.Services;
 using SpringHackathon.Utils;
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace SpringHackathon.Controllers
@@ -162,12 +160,12 @@ namespace SpringHackathon.Controllers
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "User");
-                    _emailSenderService.SendMessage(registerModel.Email, EmailTemplate.Subject, EmailTemplate.Body);
+                    await _userManager.AddToRoleAsync(user, "User");     
+                    Thread thread = new Thread(() => _emailSenderService.SendMessage(registerModel.Email, EmailTemplate.Subject, EmailTemplate.Body));
+                    thread.Start();
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return Redirect(returnurl ?? "/");
                 }
-                    
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return Redirect(returnurl ?? "/");
             }
             return View();
         }
@@ -223,9 +221,10 @@ namespace SpringHackathon.Controllers
 
 				if (result.Succeeded)
 				{
-					if (result.Succeeded)
-						_emailSenderService.SendMessage(info.Principal.FindFirstValue(ClaimTypes.Email), EmailTemplate.Subject, EmailTemplate.Body);
-
+                    await _userManager.AddToRoleAsync(user, "User");
+                    Thread thread = new Thread(() => _emailSenderService.SendMessage(info.Principal.FindFirstValue(ClaimTypes.Email), EmailTemplate.Subject, EmailTemplate.Body));
+                    thread.Start();
+                   
 					result = await _userManager.AddLoginAsync(user, info);
 					if (result.Succeeded)
 					{
@@ -341,6 +340,24 @@ namespace SpringHackathon.Controllers
                     ModelState.AddModelError("", error.Description);
             }
             return (View(model));
+        }
+
+        [HttpPost]
+        [Authorize]
+
+        public async Task<IActionResult> Delete()
+        {
+            
+            var user = await _userManager.GetUserAsync(User);
+
+            if(user != null)
+                await _signInManager.SignOutAsync();
+
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+                return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index", "Account");
         }
     }
 }

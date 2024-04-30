@@ -14,7 +14,7 @@ namespace SpringHackathon.Controllers
         {
             _userManager = userManager;
         }
-        public async Task<IActionResult> Chat()
+        public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync(User);
             return View(currentUser);

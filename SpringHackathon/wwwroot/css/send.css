@@ -1,43 +1,41 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
-
-.input_box input, button {
-    font-family: 'Russo One', sans-serif;
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto');
+.input_container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ada9a8;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
     text-transform: uppercase;
-    text-align: center;
-    font-size: 12px;
+    font-size: 18px;
     color: white;
-}
-
-.cta {
-    color: #0d1117;
-}
-
-.input_box {
-    width: 80vw;
-    margin: 1rem;
     display: flex;
-    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
+    padding: 1rem;
 }
 
-input {
-    width: 65vw;
-    height: 40px;
-    padding: 0;
-    background-color: #0d1117;
-    border: solid 3px #c3cbd3;
-    border-radius: 6px;
+    .input_container input {
+        width: 65vw;
+        height: 40px;
+        background-color: #0d1117;
+        border: solid 3px #c3cbd3;
+        border-radius: 6px;
+        color: white;
+        padding-left: 10px;
+    }
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #0d1117 inset;
 }
 
-.input_box input::placeholder {
-    color: white;
+.input_container input::placeholder {
+    text-align: center;
 }
 
-.input_box::target-text {
-    color: white;
-}
-
-.input_box button {
+.input_container button {
     width: 15vw;
     height: 40px;
     margin-left: 1rem;
@@ -48,7 +46,7 @@ input {
     cursor: pointer;
 }
 
-    .input_box button:hover {
+    .input_container button:hover {
         background-color: white;
         color: black;
         border: none;

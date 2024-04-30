@@ -1,7 +1,18 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<link rel="stylesheet" href="~/css/send.css" >
+<link rel="stylesheet" href="~/css/chat.css" />
 
+<div class="messages_container">
+</div>
+<div class="input_container">
+    <input type="text" placeholder="Input message: " id="messageInput" />
+    <button id="sendButton"><strong>Send</strong></button>
+</div>
+<script>
+    var currentUser = @Html.Raw(Json.Serialize(Model));
+</script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

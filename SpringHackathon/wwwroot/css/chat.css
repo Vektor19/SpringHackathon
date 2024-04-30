@@ -1,4 +1,5 @@
-﻿* {
+﻿
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,9 +7,6 @@
 
 body {
     background: #181616;
-    font-family: system-ui;
-    display: grid;
-    grid-template-columns: 250px auto;
 }
 
 header h1 {
@@ -35,7 +33,7 @@ aside {
     padding: 1rem;
     margin: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .user {
@@ -50,34 +48,38 @@ aside {
 .bubble {
     max-width: 50vw;
     position: relative;
-    align-items: center;
     gap: 1rem;
+    display: flex; /* Add flex display */
+    align-items: center; /* Center items vertically */
 }
 
     .bubble:after {
         position: absolute;
-        font-size: 0.75rem;
-        min-width: 150px;
-        right: 0;
-        text-align: right;
-        bottom: -1.5rem;
-        content: "sent 11:11"
+        font-size: 0.8rem;
+        min-width: 50px;
+        right: 10px;
+        bottom: 10px;
+        content: var(--time);
     }
 
     .bubble::after {
         color: white;
+        
     }
 
     .user, .bubble p {
         color: white;
     }
 
+
 .me {
-    margin-left: auto;
+    margin-left: auto; /* Add margin to move text to the left */
+    
 }
 
+
 .you {
-    margin-right: auto;
+    margin-right: auto; /* Add margin to move text to the right */
 }
 
 main {
@@ -95,6 +97,20 @@ main {
 }
 
 .messages_container {
-    width: auto;
-    height: 90vh;
+    width: 75%; /* Set the width to 50% */
+    margin-left: auto; /* Push the container to the right */
+    height: 93vh;
+    max-height: 93vh;
+    overflow-y: auto;
+}
+
+
+::-webkit-scrollbar { /* chrome based */
+    width: 0px; /* ширина scrollbar'a */
+    background: transparent; /* опционально */
+}
+
+html {
+    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none; /* Firefox */
 }

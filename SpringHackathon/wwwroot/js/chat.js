@@ -24,7 +24,8 @@ connection.on("ReceiveMessage", function (username, message) {
 
     divBubble.style.setProperty('--time', '"' + currentTime + '"');
     console.log(currentTime);
-
+    var maxWidth = 400;
+    divBubble.style.maxWidth = `${maxWidth}px`;
 
     // Create the path element within SVG
     var pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");

@@ -17,7 +17,6 @@ namespace SpringHackathon.Controllers
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync(User);
-/*            var users = _userManager.Users.ToList();*/
             return View(currentUser);
         }
     }

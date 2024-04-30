@@ -1,16 +1,10 @@
 using SpringHackathon.Models;
 using SpringHackathon.Settings;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authentication;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SpringHackathon.Services;
-using Microsoft.Extensions.DependencyInjection;
 using SpringHackathon.Hubs;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
-using System.Xml.Linq;
 var builder = WebApplication.CreateBuilder(args);
 var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
 
@@ -43,7 +37,7 @@ builder.Services.AddSwaggerGen(c =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
-//Google auth
+
 builder.Services.AddAuthentication()
     .AddGoogle(options =>
     {
@@ -73,15 +67,13 @@ builder.Services.AddAuthentication()
          options.SaveTokens = true;
      });
 
-// Add services to the container.
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    
     app.UseHsts();
 }
 app.UseSwagger();

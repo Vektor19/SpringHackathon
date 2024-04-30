@@ -5,11 +5,11 @@ using SpringHackathon.Services;
 using SpringHackathon.Hubs;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
 
 builder.Services.Configure<EmailSenderConfig>(builder.Configuration.GetSection("EmailSenderConfig"));
-
 builder.Services.AddSingleton<EmailSenderService>(service => new EmailSenderService(builder.Configuration.GetSection(nameof(EmailSenderConfig)).Get<EmailSenderConfig>()));
 
 builder.Services.AddControllersWithViews();
@@ -66,7 +66,6 @@ builder.Services.AddAuthentication()
          options.Scope.Add("read:user");
          options.SaveTokens = true;
      });
-
 
 var app = builder.Build();
 

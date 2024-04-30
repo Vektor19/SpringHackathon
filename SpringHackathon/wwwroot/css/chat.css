@@ -48,8 +48,9 @@ aside {
 .bubble {
     max-width: 50vw;
     position: relative;
-    align-items: center;
     gap: 1rem;
+    display: flex; /* Add flex display */
+    align-items: center; /* Center items vertically */
 }
 
     .bubble:after {
@@ -72,12 +73,13 @@ aside {
 
 
 .me {
-    margin-left: auto;
+    margin-left: auto; /* Add margin to move text to the left */
+    
 }
 
 
 .you {
-    margin-right: auto;
+    margin-right: auto; /* Add margin to move text to the right */
 }
 
 main {
@@ -95,8 +97,20 @@ main {
 }
 
 .messages_container {
-    width: 100%;
-    height: 90vh;
-    max-height: 90vh;
+    width: 75%; /* Set the width to 50% */
+    margin-left: auto; /* Push the container to the right */
+    height: 93vh;
+    max-height: 93vh;
     overflow-y: auto;
+}
+
+
+::-webkit-scrollbar { /* chrome based */
+    width: 0px; /* ширина scrollbar'a */
+    background: transparent; /* опционально */
+}
+
+html {
+    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none; /* Firefox */
 }

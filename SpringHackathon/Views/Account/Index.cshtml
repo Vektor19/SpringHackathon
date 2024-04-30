@@ -10,16 +10,15 @@
 <head>
     <title>User Data</title>
     <link href="/css/Account.css" rel="stylesheet" />
+
 </head>
 <body>
     <div>
-        
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
 
-
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
 
         <div class='light x4'></div>
         <div class='light x5'></div>
@@ -34,7 +33,6 @@
                 </div>
                 <div class="user-info">
                     <h3 style="font-size:1.5vw; class="nickname"><strong>UserName:</strong> <br><span style="font-size:1.2vw;">@Model.UserName</span></h3>
-
                     <h3 style="font-size:1.5vw; class="email"><strong>Email:</strong> <br><span style="font-size:1.2vw;">@Model.Email</span></h3>
                 </div>
                 <div class="devide-btns">
@@ -44,13 +42,31 @@
                     <form asp-action="Password" method="get">
                         <button class="password-btn" type="submit"><strong>Change<br>Password</strong></button>
                     </form>
-                    <form asp-action="Delete" method="post">
-                        <button class="password-btn del" type="submit"><strong>Delete</strong></button>
-                    </form>
+                    <button class="password-btn del" onclick="openModal()"><strong>Delete</strong></button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Модальное окно -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this account?</p>
+            <button class="left" onclick="closeModal()">No</button>
+            <form asp-action="Delete" method="post">
+                <button class="right" onclick="deleteAccount()">Yes</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+    </script>
 </body>
 </html>
-

@@ -14,10 +14,10 @@ namespace SpringHackathon.Controllers
         {
             _userManager = userManager;
         }
+
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync(User);
-/*            var users = _userManager.Users.ToList();*/
             return View(currentUser);
         }
     }

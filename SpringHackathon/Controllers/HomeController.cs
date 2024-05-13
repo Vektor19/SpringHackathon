@@ -1,9 +1,5 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using SpringHackathon.Models;
-using SpringHackathon.Services;
 using System.Diagnostics;
 
 namespace SpringHackathon.Controllers
@@ -32,7 +28,7 @@ namespace SpringHackathon.Controllers
 		/// Action method for the Privacy page.
 		/// </summary>
 		/// <returns>An IActionResult representing the Privacy view.</returns>
-		public IActionResult Privacy()
+		public IActionResult Rules()
 		{
 			return View();
 		}
